@@ -1,10 +1,6 @@
 # Public ArcGIS REST Services Directory
 
 A curated collection of public-facing federal, state, county, regional, and municipal ArcGIS REST service directories across the United States, U.S. Territories, and select organizations.
-
-> **Attribution & Terms of Use:**  
-> This directory is a derivative compilation based on the comprehensive work curated by **Joseph Elfelt** ([mappingsupport.com](https://mappingsupport.com)). In accordance with the original terms, this resource is freely available to the public. Commercial products derived from this list are prohibited without prior written authorization from Joseph Elfelt.
-
 ---
 
 ## Table of Contents
