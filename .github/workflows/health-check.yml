@@ -1,0 +1,44 @@
+name: Check ArcGIS Servers Health
+
+on:
+  schedule:
+    - cron: '0 0 * * 3'  # Runs weekly on Wednesdays
+  workflow_dispatch:      # Allows manual trigger via GitHub Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          pip install aiohttp
+
+      - name: Run Server Health Check
+        run: |
+          python check_servers.py
+
+      - name: Commit and Push Status Report
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add SERVER_STATUS.md
+          if git diff --staged --quiet; then
+            echo "No status changes to commit."
+          else
+            git commit -m "chore(status): update ArcGIS server health report [skip ci]"
+            git push
+          finally:
+            echo "Health check completed."
